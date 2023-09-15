@@ -3,6 +3,7 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
 from churnPredictor import logger , CustomException
+import joblib
 
 class ModelTrainer:
     def __init__(self,config:ModelTrainerConfig):
@@ -21,8 +22,12 @@ class ModelTrainer:
 
         rfc = RandomForestClassifier(n_estimators=config.n_estimators,oob_score=config.oob_score)
 
+
         rfc.fit(X_train,y_train)
         logger.info(f'the {rfc} model trained successfully')
+        joblib.dump(rfc,config.model_ojb)
+        logger.info(f'model Successfull dumped.')
+
 
         return rfc , X_test , y_test
 
@@ -48,7 +53,4 @@ class ModelTrainer:
         return evaluation_report
     
     def train_model(self):
-        model ,  X_test , y_test = self.initiate_model_training()
-        y_pred = model.predict(X_test)
-        self.evaluate(y_test,y_pred)
-        
+        self.initiate_model_training()

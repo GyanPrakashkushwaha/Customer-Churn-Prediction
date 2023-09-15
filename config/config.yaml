@@ -24,3 +24,8 @@ model_trainer:
   train_data: artifacts\transformed_data\train_transformed.csv
   test_data: artifacts\transformed_data\test_transformed.csv
   model_obj: artifacts\model\model.joblib
+
+
+mflow_tracking:
+  mlfow_dir: artifacts\mlflowTracking
+  
