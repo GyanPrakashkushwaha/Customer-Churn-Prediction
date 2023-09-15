@@ -4,3 +4,4 @@
 ## TODO: 
 - read data from mongoDB
 - do EDA
+- add joblib model
