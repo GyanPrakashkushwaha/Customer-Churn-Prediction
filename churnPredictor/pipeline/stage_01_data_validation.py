@@ -1,4 +1,3 @@
-
 from components.data_validation import DataValidataion
 from configuration import ConfigurationManager
 
@@ -15,3 +14,4 @@ class DataValidationTrainingPipeline:
         data_val_config = config.get_data_validation_config()
         data_validation = DataValidataion(config_in=data_val_config)
         data_validation.validate_features()
+

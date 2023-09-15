@@ -1,4 +1,4 @@
-from entity import DataValidationConfig
+from entity import DataTransformationConfig, DataValidationConfig
 from churnPredictor.constants import *
 from churnPredictor.utils import *
 
@@ -36,7 +36,21 @@ class ConfigurationManager:
         return data_validation_config
         
         
+    
+    def get_data_transformation_config(self):
+        config = self.config.data_transformation
+        # schema = self.schema.columns_renamer
+
+        create_dirs([config.root_dir,config.model_dir])
         
-        
+
+        return DataTransformationConfig(
+            root_dir=config.root_dir,
+            train_data=config.train_data_path,
+            test_data=config.test_data_path,
+            transform_test_df_path=config.transformed_test_df_path,
+            transform_train_df_path=config.transformed_train_df_path,
+            preprocessor_obj=config.preprocessor_obj,
+            model=config.model_dir)
         
         
