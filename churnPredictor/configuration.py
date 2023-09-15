@@ -1,4 +1,4 @@
-from entity import DataTransformationConfig, DataValidationConfig
+from entity import DataTransformationConfig, DataValidationConfig, ModelTrainerConfig
 from churnPredictor.constants import *
 from churnPredictor.utils import *
 
@@ -53,4 +53,18 @@ class ConfigurationManager:
             preprocessor_obj=config.preprocessor_obj,
             model=config.model_dir)
         
+     
+    def get_modelTrainer_config(self):
+        config = self.config.model_trainer
+        params = self.params.RandomForest
+
+        create_dirs([config.model_dir])
         
+
+        return ModelTrainerConfig(
+            train_data=config.train_data,
+            test_data=config.test_data,
+            model_dir=config.model_dir,
+            model_ojb=config.model_obj,
+            n_estimators=params.n_estimators,
+            oob_score=params.oob_score)

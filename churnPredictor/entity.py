@@ -20,3 +20,13 @@ class DataTransformationConfig:
     transform_test_df_path : Path
     preprocessor_obj : str
     model : Path
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    train_data : Path
+    test_data : Path
+    model_dir : Path
+    model_ojb : str
+    n_estimators : int
+    oob_score : bool
