@@ -17,3 +17,10 @@ data_transformation:
   transformed_train_df_path: artifacts\transformed_data\train_transformed.csv
   transformed_test_df_path: artifacts\transformed_data\test_transformed.csv
   preprocessor_obj: artifacts\model\preprocessorObj.joblib
+
+
+model_trainer:
+  model_dir : artifacts\model
+  train_data: artifacts\transformed_data\train_transformed.csv
+  test_data: artifacts\transformed_data\test_transformed.csv
+  model_obj: artifacts\model\model.joblib
