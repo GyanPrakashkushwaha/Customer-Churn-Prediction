@@ -29,7 +29,6 @@ from pipeline.stage_03_model_trainer import ModelTrainerPipeline
 
 
 
-
 STAGE_NAME = "Model Training stage"
 
 try:
