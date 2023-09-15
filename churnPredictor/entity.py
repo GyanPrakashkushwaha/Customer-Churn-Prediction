@@ -9,3 +9,5 @@ class DataValidationConfig:
     schema_check:dict
     make_data:dict
     STATUS_FILE:str
+
+

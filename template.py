@@ -23,8 +23,8 @@ list_of_files = [
     "experiments/trials.ipynb",
     "templates/index.html",
     'artifacts/data',
-    'schema.yaml'
-
+    'schema.yaml',
+    
 ]
 
 

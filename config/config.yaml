@@ -9,3 +9,10 @@ data_validation:
     test_data: artifacts\validation\test.csv
 
 
+data_trainsformation:
+  root_dir: artifacts\transformed_data
+  train_data_path: artifacts\validation\train.csv
+  test_data_path: artifacts\validation\test.csv
+  transformed_train_df_path: artifacts\transformed_data\train_transformed.csv
+  transformed_test_df_path: artifacts\transformed_data\test_transformed.csv
+  preprocessor_obj: artifacts\model\preprocessorObj.joblib
