@@ -39,7 +39,8 @@ class TransformData:
                                         'scaling__Subscription_Length_Months': 'Subscription_Length_Months',
                                         'scaling__Monthly_Bill': 'Monthly_Bill',
                                         'scaling__Total_Usage_GB':'Total_Usage_GB',
-                                        'remainder__Gender':'Gender'})
+                                        'remainder__Gender':'Gender',
+                                        'remainder__Churn': 'Churn'})
         
         transformed_test_df = transformed_test_df.rename(columns={
                                         'OHE__Location_Houston': 'Houston',
@@ -50,7 +51,8 @@ class TransformData:
                                         'scaling__Subscription_Length_Months': 'Subscription_Length_Months',
                                         'scaling__Monthly_Bill': 'Monthly_Bill',
                                         'scaling__Total_Usage_GB':'Total_Usage_GB',
-                                        'remainder__Gender':'Gender'})
+                                        'remainder__Gender':'Gender',
+                                        'remainder__Churn': 'Churn'})
         
         
         transformed_train_df.to_csv(self.config.transform_train_df_path,index=False)
