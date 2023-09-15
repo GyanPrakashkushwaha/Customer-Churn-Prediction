@@ -1,0 +1,10 @@
+INDEPENT_FEATURES:
+  Age: int64
+  Gender: object
+  Location: object
+  Subscription_Length_Months: int64
+  Monthly_Bill: float64
+  Total_Usage_GB: int64
+
+DEPENDET_FEATURES:
+  Churn: int64

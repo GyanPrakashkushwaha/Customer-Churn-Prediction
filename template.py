@@ -22,7 +22,8 @@ list_of_files = [
     "setup.py",
     "experiments/trials.ipynb",
     "templates/index.html",
-    'artifacts/data'
+    'artifacts/data',
+    'schema.yaml'
 
 ]
 

@@ -5,4 +5,3 @@ data_validation:
   make_data:
     train_data: artifacts\validation\train.csv
     test_data: artifacts\validation\test.csv
-    
