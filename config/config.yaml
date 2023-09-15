@@ -1,0 +1,8 @@
+
+data_validation:
+  root_dir: artifacts\validation
+  data_dir: artifacts\customer_churn_removed_col.csv
+  make_data:
+    train_data: artifacts\validation\train.csv
+    test_data: artifacts\validation\test.csv
+    
