@@ -1,4 +1,4 @@
-INDEPENT_FEATURES:
+INDENPENT_FEATURES:
   Age: int64
   Gender: object
   Location: object
