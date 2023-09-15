@@ -26,8 +26,8 @@ model_trainer:
   model_obj: artifacts\model\model.joblib
 
 
-mflow_tracking:
-  mlfow_dir: artifacts\mlflowTracking
+mlflow_tracking:
+  mlflow_dir: artifacts\mlflowTracking
   test_data: artifacts\transformed_data\test_transformed.csv
   model_obj_path : artifacts\model\model.joblib
   metrics_file_name: artifacts\mlflowTracking\metrics.json
