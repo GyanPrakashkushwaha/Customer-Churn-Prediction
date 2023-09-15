@@ -20,7 +20,7 @@ class ConfigurationManager:
     
     def get_data_validation_config(self) -> DataValidationConfig:
         config = self.config.data_validation
-        schema = self.schema.INDEPENDENT_FEATURES
+        schema = self.schema.INDENPENT_FEATURES
 
         create_dirs([config.root_dir])
         
@@ -29,10 +29,14 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             data_dir=config.data_dir,
             schema_check = schema,
-            make_data=config.make_data
+            make_data=config.make_data,
+            STATUS_FILE=config.status_file
         )
 
         return data_validation_config
+        
+        
+        
         
         
         

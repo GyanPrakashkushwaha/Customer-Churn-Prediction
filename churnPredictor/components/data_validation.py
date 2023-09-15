@@ -10,18 +10,22 @@ class DataValidataion:
         try:
             validation_status = False
             df = pd.read_csv(self.config_in.data_dir)
+            df = df.drop(columns='Churn')
             all_features = list(df.columns)
             all_schema = self.config_in.schema_check
 
             for cols in all_features:
                 if cols not in all_schema:
                     validation_status = False
-                    logger.info(f'Validation Status is {validation_status}')
+                    with open(self.config_in.STATUS_FILE,'w') as stat_file:
+                        stat_file.write(f"Validation status: {validation_status}")
                 
                 else:
                     validation_status = True
-                    logger.info(f'Validation Status is {validation_status}')
+                    with open(self.config_in.STATUS_FILE,'w') as f:
+                        f.write(f"Validation status: {validation_status}")
 
+            logger.info(f'Validation Status is {validation_status}')
             return validation_status
         except Exception as e:
             raise CustomException(e)
