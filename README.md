@@ -11,7 +11,7 @@ mlflow ui
 ```Python
 MLFLOW_TRACKING_URI=https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow \
 MLFLOW_TRACKING_USERNAME=GyanPrakashKushwaha \
-MLFLOW_TRACKING_PASSWORD=PASSWORD \
+MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05 \
 python script.py
 ```
 
@@ -19,7 +19,7 @@ python script.py
 ```bash
 export MLFLOW_TRACKING_URI=https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
 export MLFLOW_TRACKING_USERNAME=GyanPrakashKushwaha 
-export MLFLOW_TRACKING_PASSWORD=password
+export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
 ```
 
 
