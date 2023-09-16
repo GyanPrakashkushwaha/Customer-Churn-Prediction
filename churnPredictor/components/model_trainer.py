@@ -31,7 +31,7 @@ class ModelTrainer:
         rfc = RandomForestClassifier(n_estimators=config.n_estimators,oob_score=config.oob_score)
 
 
-        rfc.fit(X_train,y_train)
+        rfc.fit(X_train,y_train.values.ravel())
         logger.info(f'the {rfc} model trained successfully')
         joblib.dump(rfc,config.model_ojb)
 

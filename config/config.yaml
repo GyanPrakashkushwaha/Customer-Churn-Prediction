@@ -37,7 +37,7 @@ model_trainer:
 
 mlflow_tracking:
   mlflow_dir: artifacts\mlflowTracking
-  test_data: artifacts\transformed_data\test_transformed.csv
+  test_data: artifacts\transformed_data\X_test_transformed.csv
   # model_obj_path : artifacts\model\model.pkl
   model_obj_path : artifacts\model\model.joblib
   metrics_file_name: artifacts\mlflowTracking\metrics.json
