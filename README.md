@@ -1,6 +1,6 @@
 # Customer Churn Prediction using Machine Learning and Deep learning.
 
-# EDA 
+# Data Insights:
 - ## Numerical Data Points are equally distributed.
 ![EDA Image](artifacts/readme/EDA.png)
 - ## Almost equally distribution of each class in each feature.
@@ -9,10 +9,20 @@
 equal contribution of all classes
 ![with repect to churn](artifacts/readme/output.png)
 
-
-
-
-
+## required packages:
+```Python
+pandas
+pyYAML
+tqdm
+ensure==1.0.2
+joblib
+python-box==6.0.2
+scikit-learn
+dagshub
+mlflow==2.2.2
+seaborn
+streamlit
+```
 
 
 
@@ -31,6 +41,3 @@ export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
 
 ## TODO: 
 - read data from mongoDB
-- do EDA
-- add joblib model
-- add max_value
