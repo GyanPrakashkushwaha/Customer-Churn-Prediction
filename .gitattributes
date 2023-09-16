@@ -1,0 +1,2 @@
+path/to/largefile.ext filter=lfs diff=lfs merge=lfs -text
+artifacts/model/model.joblib filter=lfs diff=lfs merge=lfs -text
