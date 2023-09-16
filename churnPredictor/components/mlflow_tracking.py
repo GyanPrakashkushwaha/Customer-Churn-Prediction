@@ -1,19 +1,13 @@
-from pathlib import Path
 from churnPredictor.entity import MLFlowTrackingConfig
-from churnPredictor.utils import save_json
-from churnPredictor.components.model_trainer import ModelTrainer
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
 import pandas as pd
 import joblib
 import mlflow
-from urllib.parse import urlparse
 from churnPredictor import logger , CustomException
 import json
 import os
-import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 from catboost import CatBoostClassifier
 from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, RandomForestClassifier
 from xgboost import XGBClassifier
@@ -69,7 +63,7 @@ class TrackModelPerformance:
                 # X_test = test_data.drop('Churn',axis=1)
 
                 y_test = pd.read_csv(self.config.y_test_path)
-                mlflow.set_experiment('old')
+                mlflow.set_experiment(model_name)
 
                 with mlflow.start_run():
                     y_pred = model.predict(X_test)

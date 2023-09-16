@@ -5,7 +5,7 @@ import joblib
 st.title('Customer churn Predictor')
 
 df = pd.read_csv(r'artifacts\raw_data\customer_churn_removed_col.csv')
-model = joblib.load(open(f'artifacts\model\model.joblib', 'rb'))
+model = joblib.load(open(f'artifacts\model\RandomForestClassifier.joblib', 'rb'))
 preprocess = joblib.load(open(f'artifacts\model\preprocessorObj.joblib', 'rb'))
 
 age = st.number_input(label='Age', min_value=18, max_value=70)
@@ -25,7 +25,12 @@ input_data = pd.DataFrame(data=[[age, gender_trans, subscription_length, monthly
 
 
 input_data_transformed = preprocess.transform(input_data)
-st.write(input_data_transformed)
-st.write(input_data)
-st.subheader(f'Customers churn: {model.predict(input_data_transformed)}')
-st.write(model)
+# st.write(input_data_transformed)
+# st.write(input_data)
+if st.button('Predict'):
+    pred = model.predict(input_data_transformed)[0]
+    if pred ==0:
+        st.subheader(f'Customer went [{pred} Customers churn ]')
+    else:
+        st.subheader(f'Customer stayed [{pred} Customers churn ]')
+
