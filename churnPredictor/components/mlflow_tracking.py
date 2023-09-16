@@ -14,6 +14,7 @@ import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
 class TrackModelPerformance:
     def __init__(self,config:MLFlowTrackingConfig):
         self.config = config
@@ -39,44 +40,17 @@ class TrackModelPerformance:
         return evaluation_report 
     
 
-    def create_experiment(self,experiment_name,run_name,model,metrics,confusion_matrix=None,params=None):
+    def start_mlflow(self):
         try:
+
+            # I will commit this to use MLFlow offline and run ```mlflow ui``` and for online everything remain uncommented
+            
             mlflow.set_tracking_uri('https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow')
             os.environ["MLFLOW_TRACKING_USERNAME"]="GyanPrakashKushwaha"
             os.environ["MLFLOW_TRACKING_PASSWORD"]= '53950624aa84e08b2bd1dfb3c0778ff66c4e7d05'
-            
-            # mlflow.
-            mlflow.set_registry_uri(self.config.mlflow_uri)
-            self.tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-            mlflow.set_experiment(experiment_name=experiment_name)
-            with mlflow.start_run():
-
-                if not params == None:
-                    for i in params:
-                        mlflow.log_param(i,params[i])
-
-                for metric in metrics:
-                    mlflow.log_metric(metric,metrics[metric])
-
-
-                if not confusion_matrix == None:
-                    mlflow.log_artifact(confusion_matrix,'confusion_matrix')
-                
-                mlflow.log_param('tree',params)
-                mlflow.sklearn.log_model(model,self.config.model_obj)
-                
-                mlflow.set_tag("tag1", "Random Forest")
-                mlflow.set_tags({"tag2":"basic model", "tag3":"experimentation"})
-
-                logger.info('Run - %s is logged to Experiment - %s' %(run_name, experiment_name))
-        except Exception as e:
-            raise CustomException(e)
-
-
-    def start_mlflow(self):
-        try:
             test_data = pd.read_csv(self.config.test_data)
+            
             model = pickle.load(open(self.config.model_obj,'rb'))
             logger.info(f'{model} loaded')
             X_test = test_data.drop('Churn',axis=1)
@@ -84,23 +58,23 @@ class TrackModelPerformance:
 
             mlflow.set_registry_uri(self.config.mlflow_uri)
             tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+            mlflow.set_experiment('New')
 
-            y_pred = model.predict(X_test)
-            evaluation_report = self.evaluate(true=y_test,pred=y_pred)
-            with open(self.config.metrics_file, 'w') as json_file:
-                json.dump(evaluation_report, json_file)
+            with mlflow.start_run():
+                y_pred = model.predict(X_test)
+                evaluation_report = self.evaluate(true=y_test,pred=y_pred)
+                with open(self.config.metrics_file, 'w') as json_file:
+                    json.dump(evaluation_report, json_file)
 
-            
-            self.create_experiment(experiment_name='Random-Forest',
-                                run_name='experiment_1',
-                                model=model,
-                                metrics=evaluation_report,
-                                params=self.config.params,
-                                confusion_matrix=self.config.confusion_metrics)
+                if not self.config.params == None:
+                    for param in self.config.params:
+                        mlflow.log_param(param, self.config.params[param])
+                # mlflow.log_params(self.config.params)
 
-            if tracking_url_type_store != 'file':
-                mlflow.sklearn.log_model(model, self.config.model_obj, registered_model_name="random forest")
-            else:
-                mlflow.sklearn.log_model(model,  self.config.model_obj, registered_model_name="random forest")
+                for metric in evaluation_report:
+                    mlflow.log_metric(metric,evaluation_report[metric])
+                
+                mlflow.sklearn.log_model(sk_model=model,artifact_path='model')
         except Exception as e:
             raise CustomException(e)
+

@@ -29,16 +29,16 @@ from pipeline.stage_04_mflow_tracking import MlflowModelTracking
 
 
 
-STAGE_NAME = "Model Training stage"
+# STAGE_NAME = "Model Training stage"
 
-try:
-   logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
-   model_trainer = ModelTrainerPipeline()
-   model_trainer.main()
-   logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
-except Exception as e:
-   logger.exception(e)
-   raise CustomException(e)
+# try:
+#    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+#    model_trainer = ModelTrainerPipeline()
+#    model_trainer.main()
+#    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+# except Exception as e:
+#    logger.exception(e)
+#    raise CustomException(e)
 
 
 
