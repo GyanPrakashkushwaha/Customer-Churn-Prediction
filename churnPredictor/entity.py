@@ -30,3 +30,16 @@ class ModelTrainerConfig:
     model_ojb : str
     n_estimators : int
     oob_score : bool
+
+
+@dataclass(frozen=True)
+class MLFlowTrackingConfig:
+    mflow_dir : Path
+    test_data: Path
+    model_obj : str
+    metrics_file: str
+    params : dict
+    mlflow_uri : str
+    target_col : str
+
+    

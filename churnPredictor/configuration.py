@@ -59,7 +59,6 @@ class ConfigurationManager:
         params = self.params.RandomForest
 
         create_dirs([config.model_dir])
-        
 
         return ModelTrainerConfig(
             train_data=config.train_data,
@@ -68,3 +67,21 @@ class ConfigurationManager:
             model_ojb=config.model_obj,
             n_estimators=params.n_estimators,
             oob_score=params.oob_score)
+    
+
+    def get_mlflow_tracking_config(self) -> MLFlowTrackingConfig:
+        config = self.config.mlflow_tracking
+        params = self.params.RandomForest
+        schema = self.schema.DEPENDET_FEATURES
+
+        # create_dirs([self.config.mflow_dir])
+
+        return MLFlowTrackingConfig(
+            mflow_dir=config.mlflow_dir,
+            test_data=config.test_data,
+            model_obj=config.model_obj_path,
+            metrics_file=config.metrics_file_name,
+            params=params,
+            target_col=schema.Churn,
+            mlflow_uri='https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow'
+        )

@@ -32,7 +32,6 @@ def create_dirs(path_to_dirs:list,verbose=True):
 def save_json(path:Path,data:dict):
     with open(path,'r') as f:
         json.dump(data,f,indent=4)
-
     logger.info(f"json file saved at: {path}")
 
 
