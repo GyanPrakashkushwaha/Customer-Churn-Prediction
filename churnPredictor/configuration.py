@@ -39,9 +39,9 @@ class ConfigurationManager:
         return data_validation_config
         
         
-    
+
     def get_data_transformation_config(self):
-        config = self.config.data_transformation
+        config = self.config.data_to_train_model
         # schema = self.schema.columns_renamer
 
         create_dirs([config.root_dir,config.model_dir])
@@ -51,11 +51,15 @@ class ConfigurationManager:
             root_dir=config.root_dir,
             train_data=config.train_data_path,
             test_data=config.test_data_path,
-            transform_test_df_path=config.transformed_test_df_path,
-            transform_train_df_path=config.transformed_train_df_path,
+            transform_X_test_path=config.transform_X_train_path,
+            transform_X_train_path=config.transform_X_test_path,
+            y_test_path=config.y_test_path,
+            y_train_path=config.y_train_path,
             preprocessor_obj=config.preprocessor_obj,
-            model=config.model_dir)
-        
+            model=config.model_dir,
+            )
+
+
      
     def get_modelTrainer_config(self):
         config = self.config.model_trainer

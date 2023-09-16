@@ -9,7 +9,6 @@ from churnPredictor import logger , CustomException
 import pickle
 
 
-
 class TransformData:
     def __init__(self,config:DataTransformationConfig):
         self.config = config
@@ -21,16 +20,22 @@ class TransformData:
         test_df = pd.read_csv(self.config.test_data)
         # test_df = test_df.drop(columns='Churn')
 
-        train_df['Gender']=train_df['Gender'].replace({'Male':0,'Female':1})
-        test_df['Gender']=test_df['Gender'].replace({'Male':0,'Female':1})
+        X_train = train_df.drop(columns='Churn')
+        y_train = train_df['Churn']
+        X_test = test_df.drop(columns='Churn')
+        y_test= test_df['Churn']
+
+
+        X_train['Gender']=X_train['Gender'].replace({'Male':0,'Female':1})
+        X_test['Gender']=X_test['Gender'].replace({'Male':0,'Female':1})
 
         preprocessing = ColumnTransformer(transformers=[
                         ('OHE',OneHotEncoder(drop='first',sparse_output=False,dtype=np.int64),['Location']),
                         ('scaling',MinMaxScaler(),['Age', 'Subscription_Length_Months', 'Monthly_Bill', 'Total_Usage_GB'])
                     ],remainder='passthrough')
         
-        transformed_train = preprocessing.fit_transform(train_df.drop(columns='Churn'))
-        transformed_test = preprocessing.transform(test_df.drop(columns='Churn'))
+        transformed_train = preprocessing.fit_transform(X_train)
+        transformed_test = preprocessing.transform(X_test)
 
         transformed_train_df = pd.DataFrame(data=transformed_train,columns=preprocessing.get_feature_names_out())
         transformed_test_df = pd.DataFrame(data=transformed_test,columns=preprocessing.get_feature_names_out())
@@ -60,8 +65,11 @@ class TransformData:
                                         'remainder__Churn': 'Churn'})
         
         
-        transformed_train_df.to_csv(self.config.transform_train_df_path,index=False)
-        transformed_test_df.to_csv(self.config.transform_test_df_path,index=False)
+        transformed_train_df.to_csv(self.config.transform_X_train_path,index=False)
+        transformed_test_df.to_csv(self.config.transform_X_test_path,index=False)
+        y_train.to_csv(self.config.y_train_path,index=False)
+        y_test.to_csv(self.config.y_test_path,index=False)
+        
         joblib.dump(preprocessing,self.config.preprocessor_obj)
         logger.info("data transformation done!")
         logger.info(f'Columns : {transformed_train_df.columns}')
