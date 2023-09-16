@@ -26,10 +26,7 @@ class ModelTrainer:
         print("X_test shape:", X_test.shape)
         print("y_test shape:", y_test.shape)
 
-
-
         rfc = RandomForestClassifier(n_estimators=config.n_estimators,oob_score=config.oob_score)
-
 
         rfc.fit(X_train,y_train.values.ravel())
         logger.info(f'the {rfc} model trained successfully')
