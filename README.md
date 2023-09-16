@@ -39,10 +39,27 @@ pip install -r requirements.txt
 ```Python
 python run main.py
 ```  
+
 5. Run the the streamlit app:
 ```python
 streamlit run app.py
 ```
+### MLflow command for local web server
+```Python
+mlflow ui
+```
+
+#### run this in environment 
+```bash
+export MLFLOW_TRACKING_URI=https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
+export MLFLOW_TRACKING_USERNAME=GyanPrakashKushwaha 
+export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
+```
+### Tracking URL
+```Python
+https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
+```
+
 #### required packages:
 ```Python
 pandas
@@ -60,18 +77,6 @@ streamlit
 
 
 
-#### MLflow command for local web server
-```Python
-mlflow ui
-```
-
-#### run this in environment 
-```bash
-export MLFLOW_TRACKING_URI=https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
-export MLFLOW_TRACKING_USERNAME=GyanPrakashKushwaha 
-export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
-```
-
-
-#### TODO: 
-- read data from mongoDB
+## TODO
+- read data from mondoDB 
+- deploy the model in AWS
