@@ -35,7 +35,7 @@ churnvenv/Scipts/activate.ps1
 ```python
 pip install -r requirements.txt
 ```
-4. run main.py for `data validation` , `data transformation` `model training` and `mlflow tracking`.
+4. run main.py for `data validation` , `data transformation`, `model training` and `mlflow tracking`.
 ```Python
 python run main.py
 ```  
