@@ -11,5 +11,5 @@ seaborn
 streamlit
 xgboost
 catboost
-imlearn
+imblearn
 # -e .
