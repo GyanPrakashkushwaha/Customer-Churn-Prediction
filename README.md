@@ -1,7 +1,14 @@
 # Customer Churn Prediction using Machine Learning and Deep learning.
 
-# 1.EDA
+# EDA 
+- ## Numerical Data Points are equally distributed.
 ![EDA Image](artifacts/readme/EDA.png)
+- ## Almost equally distribution of each class in each feature.
+![Cat Features](artifacts/readme/categorical_features.png)
+- ## With respect to churn
+equal contribution of all classes
+![with repect to churn](artifacts/readme/output.png)
+
 
 
 
