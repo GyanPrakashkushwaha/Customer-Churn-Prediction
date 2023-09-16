@@ -44,18 +44,21 @@ python run main.py
 ```python
 streamlit run app.py
 ```
-### MLflow command for local web server
+
+### MLflow 
+
+- MLflow for local web server
 ```Python
 mlflow ui
 ```
 
-#### run this in environment 
+- run this in environment 
 ```bash
 export MLFLOW_TRACKING_URI=https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
 export MLFLOW_TRACKING_USERNAME=GyanPrakashKushwaha 
 export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
 ```
-### Tracking URL
+- Tracking URL
 ```Python
 https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
 ```
