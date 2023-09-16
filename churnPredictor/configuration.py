@@ -77,6 +77,7 @@ class ConfigurationManager:
             y_test_path=config.y_test_path)
     
 
+
     def get_mlflow_tracking_config(self) -> MLFlowTrackingConfig:
         config = self.config.mlflow_tracking
         params = self.params.RandomForest
@@ -92,5 +93,8 @@ class ConfigurationManager:
             params=params,
             target_col=schema.Churn,
             mlflow_uri='https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow',
-            confusion_metrics=config.confusion_metrics
+            confusion_metrics=config.confusion_metrics,
+            y_test_path=config.y_test_path
         )
+
+        

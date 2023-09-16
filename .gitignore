@@ -165,3 +165,6 @@ templates-for-book/
 
 # Ignore model
 artifacts/model/*
+
+# ignore mlruns
+mlruns/*

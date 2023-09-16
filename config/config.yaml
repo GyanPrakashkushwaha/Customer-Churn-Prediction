@@ -42,3 +42,5 @@ mlflow_tracking:
   model_obj_path : artifacts\model\model.joblib
   metrics_file_name: artifacts\mlflowTracking\metrics.json
   confusion_metrics: artifacts\mlflowTracking\confusion_metrics.jpg
+  y_test_path: artifacts\transformed_data\y_test.csv
+
