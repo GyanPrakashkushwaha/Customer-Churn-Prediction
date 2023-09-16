@@ -2,13 +2,13 @@ from entity import ModelTrainerConfig
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
-from churnPredictor import logger
+from churnPredictor import logger , CustomException
 import joblib
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-
+import os
 
 class ModelTrainer:
     def __init__(self,config:ModelTrainerConfig):
@@ -30,11 +30,11 @@ class ModelTrainer:
         print("y_test shape:", y_test.shape)
 
         self.models = {
-            "Gradient Boosting Classifier": GradientBoostingClassifier(),
-            "XGBoost Classifier": XGBClassifier(),
-            "CatBoost Classifier": CatBoostClassifier(),
-            "AdaBoost Classifier": AdaBoostClassifier(),
-            "Random Forest Classifier": RandomForestClassifier()
+            "GradientBoostingClassifier": GradientBoostingClassifier(),
+            "XGBoostClassifier": XGBClassifier(),
+            "CatBoostClassifier": CatBoostClassifier(),
+            "AdaBoostClassifier": AdaBoostClassifier(),
+            "RandomForestClassifier": RandomForestClassifier()
         }
 
         trained_models = {}

@@ -8,7 +8,7 @@ randomforest:
   oob_score: True
   
 models:
-  Gradient Boosting Classifier:
+  GradientBoostingClassifier:
     subsample: 0.7
     n_estimators: 64
     max_features: 'log2'
@@ -16,26 +16,26 @@ models:
     learning_rate: 0.1
     criterion: 'friedman_mse'
 
-  XGBoost Classifier:
+  XGBoostClassifier:
     subsample: 0.6
     n_estimators: 64
     min_child_weight: 1
     max_depth: 7
     learning_rate: 0.1
 
-  CatBoost Classifier:
+  CatBoostClassifier:
     loss_function: 'CrossEntropy'
     learning_rate: 0.1
     iterations: 100
     eval_metric: 'Logloss'
     depth: 8
 
-  AdaBoost Classifier:
+  AdaBoostClassifier:
     n_estimators: 16
     learning_rate: 0.01
     algorithm: 'SAMME.R'
 
-  Random Forest Classifier:
+  RandomForestClassifier:
     n_estimators: 256
     min_samples_split: 10
     min_samples_leaf: 2

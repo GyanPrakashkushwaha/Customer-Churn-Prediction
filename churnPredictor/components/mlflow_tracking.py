@@ -14,6 +14,9 @@ import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from catboost import CatBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier, GradientBoostingClassifier, RandomForestClassifier
+from xgboost import XGBClassifier
 
 class TrackModelPerformance:
     def __init__(self,config:MLFlowTrackingConfig):
@@ -51,29 +54,39 @@ class TrackModelPerformance:
 
             X_test = pd.read_csv(self.config.test_data)
             
-            model = joblib.load(open(self.config.model_obj,'rb'))
-            logger.info(f'{model} loaded')
-            # X_test = test_data.drop('Churn',axis=1)
+            models = {
+                    "GradientBoostingClassifier": GradientBoostingClassifier(),
+                    "XGBoostClassifier": XGBClassifier(),
+                    "CatBoostClassifier": CatBoostClassifier(),
+                    "AdaBoostClassifier": AdaBoostClassifier(),
+                    "RandomForestClassifier": RandomForestClassifier()
+                }
 
-            y_test = pd.read_csv(self.config.y_test_path)
-            mlflow.set_experiment('random-forest')
+            for model_name in models.keys():
+                model = joblib.load(open(file=os.path.join(r'artifacts\model',f'{model_name}.joblib'),mode='rb'))
+            
+                logger.info(f'{model} loaded')
+                # X_test = test_data.drop('Churn',axis=1)
 
-            with mlflow.start_run():
-                y_pred = model.predict(X_test)
-                evaluation_report = self.evaluate(true=y_test,pred=y_pred)
-                with open(self.config.metrics_file, 'w') as json_file:
-                    json.dump(evaluation_report, json_file)
-                if not self.config.params == None:
-                    for param in self.config.params:
-                        mlflow.log_param(param, self.config.params[param])
-                # mlflow.log_params(self.config.params)
+                y_test = pd.read_csv(self.config.y_test_path)
+                mlflow.set_experiment('old')
 
-                for metric in evaluation_report:
-                    mlflow.log_metric(metric,evaluation_report[metric])
-                                
-            # if tracking_url_type_store != 'file':
-            #     mlflow.sklearn.log_model(model, 'model', registered_model_name="random forest")
-            # else:
-                mlflow.sklearn.log_model(model, self.config.model_obj)
+                with mlflow.start_run():
+                    y_pred = model.predict(X_test)
+                    evaluation_report = self.evaluate(true=y_test,pred=y_pred)
+                    with open(self.config.metrics_file, 'w') as json_file:
+                        json.dump(evaluation_report, json_file)
+                    if not self.config.params == None:
+                        for param in self.config.params:
+                            mlflow.log_param(param, self.config.params[param])
+                    # mlflow.log_params(self.config.params)
+
+                    for metric in evaluation_report:
+                        mlflow.log_metric(metric,evaluation_report[metric])
+                                    
+                # if tracking_url_type_store != 'file':
+                #     mlflow.sklearn.log_model(model, 'model', registered_model_name="random forest")
+                # else:
+                    mlflow.sklearn.log_model(model, self.config.model_obj)
         except Exception as e:
             raise CustomException(e)
