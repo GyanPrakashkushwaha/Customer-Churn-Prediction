@@ -11,6 +11,8 @@ from churnPredictor import logger , CustomException
 import json
 import os
 import pickle
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class TrackModelPerformance:
     def __init__(self,config:MLFlowTrackingConfig):
@@ -18,14 +20,15 @@ class TrackModelPerformance:
 
     def evaluate(self,true,pred):
         
-        # cm = confusion_matrix(true, pred)
+        cm = confusion_matrix(true, pred)
+        sns.heatmap(data=cm,annot=True, fmt='d', cmap='Blues')
+        plt.savefig(self.config.confusion_metrics)
         accuracy = accuracy_score(true, pred)
         recall = recall_score(true, pred)
         precision = precision_score(true, pred)
         report = classification_report(true, pred)
 
         evaluation_report = {
-                    # 'confusion_matrix': cm,
                     'accuracy': accuracy,
                     'recall': recall,
                     'precision': precision,
@@ -33,7 +36,7 @@ class TrackModelPerformance:
                     }
         
         logger.info(f'evaluation_report -> {evaluation_report}')
-        return evaluation_report
+        return evaluation_report 
     
 
     def create_experiment(self,experiment_name,run_name,model,metrics,confusion_matrix=None,params=None):
@@ -49,19 +52,18 @@ class TrackModelPerformance:
             mlflow.set_experiment(experiment_name=experiment_name)
             with mlflow.start_run():
 
-                # if not params == None:
-                #     for i in params:
-                #         mlflow.log_param(params,params[i])
+                if not params == None:
+                    for i in params:
+                        mlflow.log_param(i,params[i])
 
-                # for metric in metrics:
-                #     mlflow.log_metric(metric,metrics[metric])
+                for metric in metrics:
+                    mlflow.log_metric(metric,metrics[metric])
 
-                # mlflow.sklearn.log_model(model,self.config.model_obj)
 
-                # if not confusion_matrix == None:
-                #     mlflow.log_artifact(confusion_matrix,'confusion_matrix')
+                if not confusion_matrix == None:
+                    mlflow.log_artifact(confusion_matrix,'confusion_matrix')
                 
-                mlflow.log_metric('mse',323)
+                # mlflow.log_metric('mse',323)
                 mlflow.log_param('tree',100)
                 mlflow.sklearn.log_model(model,self.config.model_obj)
                 
@@ -94,7 +96,8 @@ class TrackModelPerformance:
                                 run_name='experiment_1',
                                 model=model,
                                 metrics=evaluation_report,
-                                params=self.config.params)
+                                params=self.config.params,
+                                confusion_matrix=self.config.confusion_metrics)
 
             if tracking_url_type_store != 'file':
                 mlflow.sklearn.log_model(model, self.config.model_obj, registered_model_name="random forest")

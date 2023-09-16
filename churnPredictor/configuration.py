@@ -86,5 +86,6 @@ class ConfigurationManager:
             metrics_file=config.metrics_file_name,
             params=params,
             target_col=schema.Churn,
-            mlflow_uri='https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow'
+            mlflow_uri='https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow',
+            confusion_metrics=config.confusion_metrics
         )

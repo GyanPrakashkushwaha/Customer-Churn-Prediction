@@ -31,3 +31,4 @@ mlflow_tracking:
   test_data: artifacts\transformed_data\test_transformed.csv
   model_obj_path : artifacts\model\model.pkl
   metrics_file_name: artifacts\mlflowTracking\metrics.json
+  confusion_metrics: artifacts\mlflowTracking\confusion_metrics.jpg

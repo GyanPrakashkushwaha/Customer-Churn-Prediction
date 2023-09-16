@@ -41,5 +41,6 @@ class MLFlowTrackingConfig:
     params : dict
     mlflow_uri : str
     target_col : str
+    confusion_metrics:str
 
     
