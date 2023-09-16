@@ -56,7 +56,7 @@ class TrackModelPerformance:
             # X_test = test_data.drop('Churn',axis=1)
 
             y_test = pd.read_csv(self.config.y_test_path)
-            mlflow.set_experiment('old')
+            mlflow.set_experiment('random-forest')
 
             with mlflow.start_run():
                 y_pred = model.predict(X_test)

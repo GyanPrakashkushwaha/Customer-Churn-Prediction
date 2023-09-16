@@ -1,3 +1,11 @@
+randomforest:
+  n_estimators: 256
+  min_samples_split: 10
+  min_samples_leaf: 2
+  max_features: 'sqrt'
+  max_depth: 40
+  criterion: 'entropy'
+  oob_score: True
 models:
   Gradient Boosting Classifier:
     subsample: 0.7
