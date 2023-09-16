@@ -63,8 +63,7 @@ class TrackModelPerformance:
                 if not confusion_matrix == None:
                     mlflow.log_artifact(confusion_matrix,'confusion_matrix')
                 
-                # mlflow.log_metric('mse',323)
-                mlflow.log_param('tree',100)
+                mlflow.log_param('tree',params)
                 mlflow.sklearn.log_model(model,self.config.model_obj)
                 
                 mlflow.set_tag("tag1", "Random Forest")
