@@ -1,5 +1,5 @@
 from pathlib import Path
-from entity import MLFlowTrackingConfig
+from churnPredictor.entity import MLFlowTrackingConfig
 from churnPredictor.utils import save_json
 from churnPredictor.components.model_trainer import ModelTrainer
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
@@ -8,6 +8,7 @@ import joblib
 import mlflow
 from urllib.parse import urlparse
 from churnPredictor import logger , CustomException
+import json
 
 
 class TrackModelPerformance:
@@ -16,17 +17,19 @@ class TrackModelPerformance:
 
     def evaluate(self,true,pred):
         
-        cm = confusion_matrix(true, pred)
+        # cm = confusion_matrix(true, pred)
         accuracy = accuracy_score(true, pred)
         recall = recall_score(true, pred)
         precision = precision_score(true, pred)
         report = classification_report(true, pred)
 
-        evaluation_report = {'confusion_matrix': cm,
+        evaluation_report = {
+                    # 'confusion_matrix': cm,
                     'accuracy': accuracy,
                     'recall': recall,
                     'precision': precision,
-                    'classification_report': report}
+                    # 'classification_report': report
+                    }
         
         logger.info(f'evaluation_report -> {evaluation_report}')
         return evaluation_report
@@ -39,17 +42,21 @@ class TrackModelPerformance:
         mlflow.set_experiment(experiment_name=experiment_name)
         with mlflow.start_run():
 
-            if not params == None:
-                for i in params:
-                    mlflow.log_param(params,params[i])
+            # if not params == None:
+            #     for i in params:
+            #         mlflow.log_param(params,params[i])
 
-            for metric in metrics:
-                mlflow.log_metric(metric,metrics[metric])
+            # for metric in metrics:
+            #     mlflow.log_metric(metric,metrics[metric])
 
-            mlflow.sklearn.log_model(model,'Model')
+            # mlflow.sklearn.log_model(model,self.config.model_obj)
 
-            if not confusion_matrix == None:
-                mlflow.log_artifact(confusion_matrix,'confusion_matrix')
+            # if not confusion_matrix == None:
+            #     mlflow.log_artifact(confusion_matrix,'confusion_matrix')
+            
+            mlflow.log_metric('mse',323)
+            mlflow.log_param('tree',100)
+            mlflow.sklearn.log_model(model,self.config.model_obj)
             
             mlflow.set_tag("tag1", "Random Forest")
             mlflow.set_tags({"tag2":"basic model", "tag3":"experimentation"})
@@ -69,15 +76,18 @@ class TrackModelPerformance:
 
         y_pred = model.predict(X_test)
         evaluation_report = self.evaluate(true=y_test,pred=y_pred)
-        save_json(path=Path(self.config.metrics_file),data=evaluation_report)
-        self.create_experiment(experiment_name='Random Forest Experiment',
+        with open(self.config.metrics_file, 'w') as json_file:
+            json.dump(evaluation_report, json_file)
+
+        
+        self.create_experiment(experiment_name='Random-Forest-Experiment',
                                run_name='experiment_1',
                                model=model,
                                metrics=evaluation_report,
                                params=self.config.params)
 
         if tracking_url_type_store != 'file':
-            mlflow.sklearn.log_model(model, "model", registered_model_name="random forest")
+            mlflow.sklearn.log_model(model, self.config.model_obj, registered_model_name="random forest")
         else:
-            mlflow.sklearn.log_model(model, "model")
+            mlflow.sklearn.log_model(model,  self.config.model_obj, registered_model_name="random forest")
     

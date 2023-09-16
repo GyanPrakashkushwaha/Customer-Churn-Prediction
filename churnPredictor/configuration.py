@@ -1,4 +1,7 @@
-from entity import DataTransformationConfig, DataValidationConfig, ModelTrainerConfig
+from entity import (DataTransformationConfig,
+                     DataValidationConfig, 
+                     MLFlowTrackingConfig, 
+                     ModelTrainerConfig)
 from churnPredictor.constants import *
 from churnPredictor.utils import *
 
