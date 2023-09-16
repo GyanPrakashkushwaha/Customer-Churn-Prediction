@@ -23,18 +23,14 @@ class DataTransformationConfig:
     preprocessor_obj : str
     model : Path
 
-
 @dataclass(frozen=True)
 class ModelTrainerConfig:
     train_data : Path
     test_data : Path
     model_dir : Path
-    model_ojb : str
-    n_estimators : int
-    oob_score : bool
     y_train_path : Path
     y_test_path : Path
-
+    model_params_dir : dict
 
 @dataclass(frozen=True)
 class MLFlowTrackingConfig:

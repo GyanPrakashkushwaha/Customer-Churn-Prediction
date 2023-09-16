@@ -2,9 +2,12 @@ from entity import ModelTrainerConfig
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
-from churnPredictor import logger , CustomException
+from churnPredictor import logger
 import joblib
-import pickle
+from xgboost import XGBClassifier
+from catboost import CatBoostClassifier
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 
 
 class ModelTrainer:
@@ -26,14 +29,37 @@ class ModelTrainer:
         print("X_test shape:", X_test.shape)
         print("y_test shape:", y_test.shape)
 
-        rfc = RandomForestClassifier(n_estimators=config.n_estimators,oob_score=config.oob_score)
-        rfc.fit(X_train,y_train.values.ravel())
-        logger.info(f'the {rfc} model trained successfully')
-        joblib.dump(rfc,config.model_ojb)
+        self.models = {
+            "Gradient Boosting Classifier": GradientBoostingClassifier(),
+            "XGBoost Classifier": XGBClassifier(),
+            "CatBoost Classifier": CatBoostClassifier(),
+            "AdaBoost Classifier": AdaBoostClassifier(),
+            "Random Forest Classifier": RandomForestClassifier()
+        }
 
-        
+        trained_models = {}
+        directory_path = 'artifacts/model'
+        os.makedirs(directory_path, exist_ok=True)
 
-        return rfc , X_test , y_test
+
+        for model_name in self.models.keys():
+            model = self.models[model_name]
+            model.set_params(**dict(config.model_params_dir[model_name]))
+            model.fit(X_train,y_train.values.ravel())
+            logger.info(f'the {model} model trained successfully!')
+            obj_name = model_name.strip('')
+            obj_name = ''.join(obj_name)
+
+            joblib.dump(model,open(file=os.path.join(r'artifacts\model',f'{obj_name}.joblib'),mode='wb'))
+
+            trained_models[model_name] = model
+        # rfc = RandomForestClassifier(n_estimators=config.n_estimators,oob_score=config.oob_score)
+
+        # rfc.fit(X_train,y_train.values.ravel())
+        # logger.info(f'the {rfc} model trained successfully')
+        # joblib.dump(rfc,config.model_ojb)
+
+        return trained_models , X_test , y_test
 
     def evaluate(self,true,pred):
         

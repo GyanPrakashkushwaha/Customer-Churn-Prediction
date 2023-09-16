@@ -66,15 +66,14 @@ class ConfigurationManager:
         create_dirs([config.model_dir])
         
 
+
         return ModelTrainerConfig(
             train_data=config.train_data,
             test_data=config.test_data,
             model_dir=config.model_dir,
-            model_ojb=config.model_obj,
-            n_estimators=params.n_estimators,
-            oob_score=params.oob_score,
             y_train_path=config.y_train_path,
-            y_test_path=config.y_test_path)
+            y_test_path=config.y_test_path,
+            model_params_dir=params)
     
 
 

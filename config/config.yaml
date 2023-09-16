@@ -29,7 +29,6 @@ model_trainer:
   train_data: artifacts\transformed_data\X_train_transformed.csv
   test_data: artifacts\transformed_data\X_test_transformed.csv
   # model_obj: artifacts\model\model.pkl
-  model_obj: artifacts\model\model.joblib
   y_train_path: artifacts\transformed_data\y_train.csv
   y_test_path: artifacts\transformed_data\y_test.csv
 

@@ -6,6 +6,7 @@ randomforest:
   max_depth: 40
   criterion: 'entropy'
   oob_score: True
+  
 models:
   Gradient Boosting Classifier:
     subsample: 0.7
