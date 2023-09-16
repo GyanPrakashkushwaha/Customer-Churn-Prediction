@@ -76,7 +76,7 @@ class TrackModelPerformance:
     def start_mlflow(self):
         try:
             test_data = pd.read_csv(self.config.test_data)
-            model = pickle.load(self.config.model_obj)
+            model = pickle.load(open(self.config.model_obj,'rb'))
             logger.info(f'{model} loaded')
             X_test = test_data.drop('Churn',axis=1)
             y_test = test_data['Churn']
