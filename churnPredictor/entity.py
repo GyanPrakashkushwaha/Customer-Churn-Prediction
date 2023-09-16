@@ -32,6 +32,8 @@ class ModelTrainerConfig:
     model_ojb : str
     n_estimators : int
     oob_score : bool
+    y_train_path : Path
+    y_test_path : Path
 
 
 @dataclass(frozen=True)
