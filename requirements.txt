@@ -10,4 +10,5 @@ mlflow==2.2.2
 seaborn
 streamlit
 xgboost
+catboost
 # -e .

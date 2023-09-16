@@ -1,5 +1,8 @@
 # Customer Churn Prediction using Machine Learning and Deep learning.
 
+> ## Done ✅-> EDA✅ , Data Validation✅ , Model Training✅, Model Flow Tracking✅
+
+
 # Data Insights:
 - ## Numerical Data Points are equally distributed.
 ![EDA Image](artifacts/readme/EDA.png)
@@ -8,6 +11,7 @@
 - ## With respect to churn
 equal contribution of all classes
 ![with repect to churn](artifacts/readme/output.png)
+
 
 ## required packages:
 ```Python
