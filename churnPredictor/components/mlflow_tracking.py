@@ -51,7 +51,8 @@ class TrackModelPerformance:
 
             test_data = pd.read_csv(self.config.test_data)
             
-            model = pickle.load(open(self.config.model_obj,'rb'))
+            # model = pickle.load(open(self.config.model_obj,'rb'))
+            model = joblib.load(open(self.config.model_obj,'rb'))
             logger.info(f'{model} loaded')
             X_test = test_data.drop('Churn',axis=1)
             y_test = test_data['Churn']

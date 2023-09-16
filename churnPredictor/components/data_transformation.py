@@ -60,7 +60,8 @@ class TransformData:
             
             transformed_train_df.to_csv(self.config.transform_train_df_path,index=False)
             transformed_test_df.to_csv(self.config.transform_test_df_path,index=False)
-            pickle.dump(preprocessing,open(self.config.preprocessor_obj,'wb'))
+            # pickle.dump(preprocessing,open(self.config.preprocessor_obj,'wb'))
+            joblib.dump(preprocessing,open(self.config.preprocessor_obj,'wb'))
             logger.info("data transformation done!")
             logger.info(f'Columns : {transformed_train_df.columns}')
             logger.info(f'Columns : {transformed_test_df.columns}')

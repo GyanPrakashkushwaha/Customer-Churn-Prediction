@@ -28,7 +28,8 @@ class ModelTrainer:
 
         rfc.fit(X_train,y_train)
         logger.info(f'the {rfc} model trained successfully')
-        pickle.dump(obj=rfc,file=open(config.model_ojb,'wb'))
+        # pickle.dump(obj=rfc,file=open(config.model_ojb,'wb'))
+        joblib.dump(value=rfc,filename=open(config.model_ojb,'wb'))
         logger.info(f'model Successfull dumped.')
 
         return rfc , X_test , y_test

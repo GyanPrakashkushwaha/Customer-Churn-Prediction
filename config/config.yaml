@@ -16,19 +16,22 @@ data_transformation:
   test_data_path: artifacts\validation\test.csv
   transformed_train_df_path: artifacts\transformed_data\train_transformed.csv
   transformed_test_df_path: artifacts\transformed_data\test_transformed.csv
-  preprocessor_obj: artifacts\model\preprocessorObj.pkl
+  # preprocessor_obj: artifacts\model\preprocessorObj.pkl
+  preprocessor_obj: artifacts\model\preprocessorObj.joblib
 
 
 model_trainer:
   model_dir : artifacts\model
   train_data: artifacts\transformed_data\train_transformed.csv
   test_data: artifacts\transformed_data\test_transformed.csv
-  model_obj: artifacts\model\model.pkl
+  # model_obj: artifacts\model\model.pkl
+  model_obj: artifacts\model\model.joblib
 
 
 mlflow_tracking:
   mlflow_dir: artifacts\mlflowTracking
   test_data: artifacts\transformed_data\test_transformed.csv
-  model_obj_path : artifacts\model\model.pkl
+  # model_obj_path : artifacts\model\model.pkl
+  model_obj_path : artifacts\model\model.joblib
   metrics_file_name: artifacts\mlflowTracking\metrics.json
   confusion_metrics: artifacts\mlflowTracking\confusion_metrics.jpg
