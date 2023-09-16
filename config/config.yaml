@@ -16,18 +16,18 @@ data_transformation:
   test_data_path: artifacts\validation\test.csv
   transformed_train_df_path: artifacts\transformed_data\train_transformed.csv
   transformed_test_df_path: artifacts\transformed_data\test_transformed.csv
-  preprocessor_obj: artifacts\model\preprocessorObj.joblib
+  preprocessor_obj: artifacts\model\preprocessorObj.pkl
 
 
 model_trainer:
   model_dir : artifacts\model
   train_data: artifacts\transformed_data\train_transformed.csv
   test_data: artifacts\transformed_data\test_transformed.csv
-  model_obj: artifacts\model\model.joblib
+  model_obj: artifacts\model\model.pkl
 
 
 mlflow_tracking:
   mlflow_dir: artifacts\mlflowTracking
   test_data: artifacts\transformed_data\test_transformed.csv
-  model_obj_path : artifacts\model\model.joblib
+  model_obj_path : artifacts\model\model.pkl
   metrics_file_name: artifacts\mlflowTracking\metrics.json

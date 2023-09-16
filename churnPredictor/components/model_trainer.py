@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import confusion_matrix, recall_score, accuracy_score, precision_score, classification_report
 from churnPredictor import logger , CustomException
 import joblib
-
+import pickle
 
 
 
@@ -28,7 +28,7 @@ class ModelTrainer:
 
         rfc.fit(X_train,y_train)
         logger.info(f'the {rfc} model trained successfully')
-        joblib.dump(rfc,config.model_ojb)
+        pickle.dump(obj=rfc,file=config.model_ojb)
         logger.info(f'model Successfull dumped.')
 
         return rfc , X_test , y_test

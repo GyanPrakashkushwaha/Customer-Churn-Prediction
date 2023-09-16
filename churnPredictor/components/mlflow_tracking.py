@@ -9,7 +9,8 @@ import mlflow
 from urllib.parse import urlparse
 from churnPredictor import logger , CustomException
 import json
-
+import os
+import pickle
 
 class TrackModelPerformance:
     def __init__(self,config:MLFlowTrackingConfig):
@@ -36,58 +37,68 @@ class TrackModelPerformance:
     
 
     def create_experiment(self,experiment_name,run_name,model,metrics,confusion_matrix=None,params=None):
-        mlflow.set_registry_uri(self.config.mlflow_uri)
-        self.tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
-
-        mlflow.set_experiment(experiment_name=experiment_name)
-        with mlflow.start_run():
-
-            # if not params == None:
-            #     for i in params:
-            #         mlflow.log_param(params,params[i])
-
-            # for metric in metrics:
-            #     mlflow.log_metric(metric,metrics[metric])
-
-            # mlflow.sklearn.log_model(model,self.config.model_obj)
-
-            # if not confusion_matrix == None:
-            #     mlflow.log_artifact(confusion_matrix,'confusion_matrix')
+        try:
+            mlflow.set_tracking_uri('https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow')
+            os.environ["MLFLOW_TRACKING_USERNAME"]="GyanPrakashKushwaha"
+            os.environ["MLFLOW_TRACKING_PASSWORD"]= '53950624aa84e08b2bd1dfb3c0778ff66c4e7d05'
             
-            mlflow.log_metric('mse',323)
-            mlflow.log_param('tree',100)
-            mlflow.sklearn.log_model(model,self.config.model_obj)
-            
-            mlflow.set_tag("tag1", "Random Forest")
-            mlflow.set_tags({"tag2":"basic model", "tag3":"experimentation"})
+            # mlflow.
+            mlflow.set_registry_uri(self.config.mlflow_uri)
+            self.tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-            logger.info('Run - %s is logged to Experiment - %s' %(run_name, experiment_name))
+            mlflow.set_experiment(experiment_name=experiment_name)
+            with mlflow.start_run():
+
+                # if not params == None:
+                #     for i in params:
+                #         mlflow.log_param(params,params[i])
+
+                # for metric in metrics:
+                #     mlflow.log_metric(metric,metrics[metric])
+
+                # mlflow.sklearn.log_model(model,self.config.model_obj)
+
+                # if not confusion_matrix == None:
+                #     mlflow.log_artifact(confusion_matrix,'confusion_matrix')
+                
+                mlflow.log_metric('mse',323)
+                mlflow.log_param('tree',100)
+                mlflow.sklearn.log_model(model,self.config.model_obj)
+                
+                mlflow.set_tag("tag1", "Random Forest")
+                mlflow.set_tags({"tag2":"basic model", "tag3":"experimentation"})
+
+                logger.info('Run - %s is logged to Experiment - %s' %(run_name, experiment_name))
+        except Exception as e:
+            raise CustomException(e)
 
 
     def start_mlflow(self):
-        test_data = pd.read_csv(self.config.test_data)
-        model = joblib.load(self.config.model_obj)
-        logger.info(f'{model} loaded')
-        X_test = test_data.drop('Churn',axis=1)
-        y_test = test_data['Churn']
+        try:
+            test_data = pd.read_csv(self.config.test_data)
+            model = pickle.load(self.config.model_obj)
+            logger.info(f'{model} loaded')
+            X_test = test_data.drop('Churn',axis=1)
+            y_test = test_data['Churn']
 
-        mlflow.set_registry_uri(self.config.mlflow_uri)
-        tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+            mlflow.set_registry_uri(self.config.mlflow_uri)
+            tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
 
-        y_pred = model.predict(X_test)
-        evaluation_report = self.evaluate(true=y_test,pred=y_pred)
-        with open(self.config.metrics_file, 'w') as json_file:
-            json.dump(evaluation_report, json_file)
+            y_pred = model.predict(X_test)
+            evaluation_report = self.evaluate(true=y_test,pred=y_pred)
+            with open(self.config.metrics_file, 'w') as json_file:
+                json.dump(evaluation_report, json_file)
 
-        
-        self.create_experiment(experiment_name='Random-Forest-Experiment',
-                               run_name='experiment_1',
-                               model=model,
-                               metrics=evaluation_report,
-                               params=self.config.params)
+            
+            self.create_experiment(experiment_name='Random-Forest',
+                                run_name='experiment_1',
+                                model=model,
+                                metrics=evaluation_report,
+                                params=self.config.params)
 
-        if tracking_url_type_store != 'file':
-            mlflow.sklearn.log_model(model, self.config.model_obj, registered_model_name="random forest")
-        else:
-            mlflow.sklearn.log_model(model,  self.config.model_obj, registered_model_name="random forest")
-    
+            if tracking_url_type_store != 'file':
+                mlflow.sklearn.log_model(model, self.config.model_obj, registered_model_name="random forest")
+            else:
+                mlflow.sklearn.log_model(model,  self.config.model_obj, registered_model_name="random forest")
+        except Exception as e:
+            raise CustomException(e)
