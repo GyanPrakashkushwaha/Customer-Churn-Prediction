@@ -1,5 +1,12 @@
 # Customer Churn Prediction using Machine Learning and Deep learning.
 
+# 1.EDA
+![EDA Image](artifacts/readme/EDA.png)
+
+
+
+
+
 
 
 ## MLflow command for local web server
