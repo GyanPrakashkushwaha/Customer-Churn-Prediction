@@ -8,4 +8,5 @@ scikit-learn
 dagshub
 mlflow==2.2.2
 seaborn
+streamlit
 # -e .

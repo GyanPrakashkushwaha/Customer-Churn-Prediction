@@ -24,7 +24,7 @@ list_of_files = [
     "templates/index.html",
     'artifacts/data',
     'schema.yaml',
-    
+    'app.py'
 ]
 
 
