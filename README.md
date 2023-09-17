@@ -73,7 +73,7 @@ to easy algorithm like `Logistic Regession` and Also trained `Deep Neural Networ
 from keras.layers import BatchNormalization, Dense
 from keras.losses import binary_crossentropy
 from tensorflow import keras
-from keras.callbacks import LearningRateScheduler
+from keras.callbacks import LearningRateScheduler , EarlyStopping
 from keras.activations import relu , sigmoid
 from keras import Sequential
 from keras.initializers import he_normal
@@ -116,6 +116,27 @@ model.compile(optimizer=optimizer,
 history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=20,
                     batch_size=64, 
                       callbacks=[lr_scheduler, early_stopping]) 
+
+## output
+Epoch 1/20
+1256/1256 [==============================] - 9s 5ms/step - loss: 0.7005 - accuracy: 0.5001 - val_loss: 0.7269 - val_accuracy: 0.5018 - lr: 5.0000e-04
+Epoch 2/20
+1256/1256 [==============================] - 7s 6ms/step - loss: 0.6952 - accuracy: 0.5014 - val_loss: 0.6939 - val_accuracy: 0.5006 - lr: 4.5242e-04
+Epoch 3/20
+1256/1256 [==============================] - 7s 6ms/step - loss: 0.6945 - accuracy: 0.4992 - val_loss: 0.6992 - val_accuracy: 0.5003 - lr: 4.0937e-04
+Epoch 4/20
+1256/1256 [==============================] - 7s 5ms/step - loss: 0.6938 - accuracy: 0.5042 - val_loss: 0.6933 - val_accuracy: 0.5040 - lr: 3.7041e-04
+Epoch 5/20
+1256/1256 [==============================] - 7s 5ms/step - loss: 0.6938 - accuracy: 0.5027 - val_loss: 0.6936 - val_accuracy: 0.5017 - lr: 3.3516e-04
+Epoch 6/20
+1256/1256 [==============================] - 7s 5ms/step - loss: 0.6935 - accuracy: 0.5010 - val_loss: 0.6947 - val_accuracy: 0.4987 - lr: 3.0327e-04
+Epoch 7/20
+1256/1256 [==============================] - 6s 5ms/step - loss: 0.6934 - accuracy: 0.5019 - val_loss: 0.6933 - val_accuracy: 0.5001 - lr: 2.7441e-04
+Epoch 8/20
+1256/1256 [==============================] - 6s 5ms/step - loss: 0.6935 - accuracy: 0.4967 - val_loss: 0.6933 - val_accuracy: 0.4959 - lr: 2.4829e-04
+Epoch 9/20
+1256/1256 [==============================] - 6s 5ms/step - loss: 0.6933 - accuracy: 0.5012 - val_loss: 0.6932 - val_accuracy: 0.4956 - lr: 2.2466e-04
+Epoch 9: early stopping
 ```
 - Machine learning models and best parameters
 ```Python
@@ -144,6 +165,14 @@ history = model.fit(X_train, y_train, validation_data=(X_test, y_test), epochs=2
   'max_features': 'sqrt',
   'max_depth': 40,
   'criterion': 'entropy'}}
+
+## output
+                    model	    accuracy
+0	Gradient Boosting Classifier	0.501867
+1	XGBoost Classifier	            0.498333
+2	CatBoost Classifier	            0.499667
+3	AdaBoost Classifier	            0.503067
+4	Random Forest Classifier	    0.498000
 ```
 
 
