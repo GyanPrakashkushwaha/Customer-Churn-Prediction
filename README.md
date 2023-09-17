@@ -63,7 +63,7 @@ export MLFLOW_TRACKING_PASSWORD=53950624aa84e08b2bd1dfb3c0778ff66c4e7d05
 https://dagshub.com/GyanPrakashKushwaha/Customer-Churn-Prediction.mlflow
 ```
 
-### **I TRIED MY BEST!**
+### **I TRIED MY BEST!**😓
 - For **model performance Improvement**(Data manipulation) `normalized` the features using `log normal distribution` but the performance didn't increase and then tried `Generated Data`  using `SMOTE` and then `trained model` in the large data but still the `accuracy` remained `same`.
 - For **model performance Improvement** (Model training) Used `complex Algorithms` - `GradientBoostingClassifier` , `XGBoostClassifier` , `CatBoostClassifier` , `AdaBoostClassifier` , `RandomForestClassifier`
 to easy algorithm like `Logistic Regession` and Also trained `Deep Neural Network` with different `weight Initializers` , `activation function` ,`input nodes` and `optimizer` but **models performance not Improved** 
