@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+st.set_page_config(page_title="Customer churn Predictor", page_icon=":🙂:", initial_sidebar_state="expanded")
 
 st.title('Customer churn Predictor')
 
@@ -30,7 +31,7 @@ input_data_transformed = preprocess.transform(input_data)
 if st.button('Predict'):
     pred = model.predict(input_data_transformed)[0]
     if pred ==0:
-        st.subheader(f'Customer went [{pred} Customers churn ]')
+        st.subheader(f'Customer went [Customers churn {pred}]')
     else:
-        st.subheader(f'Customer stayed [{pred} Customers churn ]')
+        st.subheader(f'Customer stayed [Customers churn {pred}]')
 
