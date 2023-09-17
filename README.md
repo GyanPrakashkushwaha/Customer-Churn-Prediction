@@ -6,12 +6,17 @@
 <video src="artifacts/readme/customerChurnPredictionProject_AdobeExpress_AdobeExpress.mp4" controls title="demo video"></video>
 ## Data Insights:
 - #### Numerical Data Points are equally distributed.
-![EDA Image](artifacts/readme/EDA.png)
+<img src="artifacts/readme/EDA.png" alt="EDA Image" width="400" >
+
+<!-- ![EDA Image](artifacts/readme/EDA.png) -->
 - #### Almost equally distribution of each class in each feature.
-![Cat Features](artifacts/readme/categorical_features.png)
+<img src="artifacts/readme/categorical_features.png" alt="EDA Image" width="400" >
+
+<!-- ![Cat Features](artifacts/readme/categorical_features.png) -->
 - #### With respect to churn
 equal contribution of all classes
-![with repect to churn](artifacts/readme/output.png)
+<img src="artifacts/readme/output.png" alt="EDA Image" width="400" >
+<!-- ![with repect to churn](artifacts/readme/output.png) -->
 
 
 ### Installation
