@@ -167,7 +167,7 @@ Epoch 9: early stopping
   'criterion': 'entropy'}}
 
 ## output
-                    model	    accuracy
+                    model	        accuracy
 0	Gradient Boosting Classifier	0.501867
 1	XGBoost Classifier	            0.498333
 2	CatBoost Classifier	            0.499667
