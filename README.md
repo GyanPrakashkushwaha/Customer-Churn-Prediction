@@ -3,7 +3,10 @@
 > #### Done ✅-> EDA✅ , Data Validation✅ , Model Training✅, Model Flow Tracking✅
 
 ### Demo
-<video src="artifacts/readme/customerChurnPredictionProject_AdobeExpress_AdobeExpress.mp4" controls title="demo video"></video>
+
+https://github.com/GyanPrakashkushwaha/Customer-Churn-Prediction/assets/127115588/7c724e7c-72ce-442d-b63f-8872ba54e2f2
+
+
 ## Data Insights:
 - #### Numerical Data Points are equally distributed.
 ![EDA Image](artifacts/readme/EDA.png)
