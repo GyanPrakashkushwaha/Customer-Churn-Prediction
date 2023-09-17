@@ -1,4 +1,4 @@
-## Customer Churn Prediction using Machine Learning and Deep learning.
+## Customer Churn Prediction 
 
 > #### Done ✅-> EDA✅ , Data Validation✅ , Model Training✅(ML Algorithms✅, Neural Netwrok✅), Mlflow Tracking✅
 
