@@ -1,6 +1,6 @@
-## Customer Churn Prediction using Machine Learning and Deep learning.
+## Customer Churn Prediction 
 
-> #### Done ✅-> EDA✅ , Data Validation✅ , Model Training✅(ML Algorithms✅ , Neural Netwrok✅), Mlflow Tracking✅
+> #### Done ✅-> EDA✅ , Data Validation✅ , Model Training✅(ML Algorithms✅, Neural Netwrok✅), Mlflow Tracking✅
 
 ### Demo
 
@@ -22,18 +22,13 @@ https://github.com/GyanPrakashkushwaha/Customer-Churn-Prediction/assets/12711558
 
 
 ### Installation
-1. Clone the repository:
+1. Clone the repository and navigate:
    
 ```python
-git clone https://github.com/GyanPrakashkushwaha/Customer-Churn-Prediction.git customer-churn-prediction
+git clone https://github.com/GyanPrakashkushwaha/Customer-Churn-Prediction.git customer-churn-prediction ; cd customer-churn-prediction
 ```
 
-2. Navigate to the project directory:
-
-```python
-cd customer-churn-prediction
-```
-3. Create virtaul environment and activate it.
+2. Create virtaul environment and activate it.
 ```python
 virtalenv churnvenv 
 churnvenv/Scipts/activate.ps1
