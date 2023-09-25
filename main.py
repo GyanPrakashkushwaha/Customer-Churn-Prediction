@@ -3,7 +3,8 @@ from pipeline.stage_01_data_validation import DataValidationTrainingPipeline
 from pipeline.stage_02_data_transformation import DataTransformationTrainingPipeline
 from churnPredictor import CustomException, logger
 from pipeline.stage_03_model_trainer import ModelTrainerPipeline 
-from pipeline.stage_04_mflow_tracking import MlflowModelTracking
+from pipeline.stage_04_mflow_tracking import MlflowModelTracking 
+from pipeline.stage_05_mlflow_serving import MLFlowModelServing
 
 # STAGE_NAME = "Data Validation stage"
 # try:
@@ -42,12 +43,24 @@ from pipeline.stage_04_mflow_tracking import MlflowModelTracking
 
 
 
-STAGE_NAME = "Model Tracking Stage stage"
+# STAGE_NAME = "Model Tracking Stage stage"
+
+# try:
+#    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
+#    mlflow_tracking = MlflowModelTracking()
+#    mlflow_tracking.main()
+#    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
+# except Exception as e:
+#    logger.exception(e)
+#    raise CustomException(e)
+
+
+STAGE_NAME = "Model Serving stage"
 
 try:
    logger.info(f">>>>>> stage {STAGE_NAME} started <<<<<<") 
-   mlflow_tracking = MlflowModelTracking()
-   mlflow_tracking.main()
+   mlflow_serving = MLFlowModelServing()
+   mlflow_serving.main()
    logger.info(f">>>>>> stage {STAGE_NAME} completed <<<<<<\n\nx==========x")
 except Exception as e:
    logger.exception(e)
